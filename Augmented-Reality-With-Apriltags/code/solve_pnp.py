@@ -14,7 +14,6 @@ def PnP(Pc, Pw, K=np.eye(3)):
         t: 3x1 numpy array describing camera translation in the world (t_wc)
     """
 
-    ##### STUDENT CODE START #####
     H = est_homography(Pw[:, :2], Pc)  
     H_normalized = np.linalg.inv(K) @ H  
 
@@ -25,7 +24,6 @@ def PnP(Pc, Pw, K=np.eye(3)):
     R_approx = np.column_stack((r1, r2, np.cross(r1, r2)))  
     U, _, Vt = np.linalg.svd(R_approx) 
     R = U @ np.diag([1, 1, np.linalg.det(U @ Vt)]) @ Vt  
-    ##### STUDENT CODE END #####
 
     return R.T, -R.T @ (t / np.linalg.norm(r1))
 

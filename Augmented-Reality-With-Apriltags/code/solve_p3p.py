@@ -13,7 +13,6 @@ def P3P(Pc, Pw, K=np.eye(3)):
         Pw = R@Pc + t
     """
 
-    ##### STUDENT CODE START #####
     Pc = np.column_stack((Pc, np.ones((Pc.shape[0], 1), dtype=Pc.dtype))) 
     K_inv = np.linalg.inv(K)
     Pc_calibrated = (K_inv @ Pc.T).T  
@@ -70,11 +69,11 @@ def P3P_Unit_Vectors(q1, q2, q3):
     Returns:
         j1, j2, j3: unit vectors for camera coordinates
         """
-    ##### STUDENT CODE START #####
+
     q_vectors = np.array([q1, q2, q3])
     scale_factor = np.linalg.norm(q_vectors, axis=1, keepdims=True)
     unit_vectors = q_vectors / scale_factor
-    ##### STUDENT CODE END #####
+
     return unit_vectors[0], unit_vectors[1], unit_vectors[2]
 
 
@@ -91,7 +90,7 @@ def P3P_coefficients(a, b, c, cos_alpha, cos_beta, cos_gamma):
         t: (3,) numpy array describing camera translation in the world (t_wc)
         Pw = R@Pc + t
     """
-    ##### STUDENT CODE START #####
+
     a4 = ((a**2 - c**2) / b**2 - 1)**2 - (4 * c**2 / b**2) * cos_alpha**2
     a3 = 4 * (((a**2 - c**2) / b**2) * (1 - ((a**2 - c**2) / b**2)) * cos_beta
             - (1 - ((a**2 + c**2) / b**2)) * cos_alpha * cos_gamma + 2 * (c**2 / b**2) * cos_alpha**2 * cos_beta)
@@ -101,7 +100,7 @@ def P3P_coefficients(a, b, c, cos_alpha, cos_beta, cos_gamma):
     a1 = 4 * (-((a**2 - c**2) / b**2) * (1 + ((a**2 - c**2) / b**2)) * cos_beta
             + 2 * (a**2 / b**2) * cos_gamma**2 * cos_beta - (1 - ((a**2 + c**2) / b**2)) * cos_alpha * cos_gamma)
     a0 = (1 + ((a**2 - c**2) / b**2))**2 - 4 * (a**2 / b**2) * cos_gamma**2
-    ##### STUDENT CODE END #####
+
     return np.array([a4, a3, a2, a1, a0], dtype=float)
 
 
@@ -117,7 +116,7 @@ def Procrustes(X, Y):
         t: (3,) numpy array describing camera translation in the world (t_wc)
 
     """
-    ##### STUDENT CODE START #####
+
     X_mean = np.mean(X, axis=0)
     Y_mean = np.mean(Y, axis=0)
     X_centered = X - X_mean
@@ -130,7 +129,5 @@ def Procrustes(X, Y):
     R = U @ np.diag([1, 1, np.linalg.det(Vt.T @ U.T)]) @ Vt
 
     t = Y_mean - R @ X_mean
-
-    ##### STUDENT CODE END #####
 
     return R, t

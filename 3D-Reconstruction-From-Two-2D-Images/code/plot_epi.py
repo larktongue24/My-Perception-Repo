@@ -41,12 +41,10 @@ def plot_epipolar_lines(image1, image2, uncalibrated_1, uncalibrated_2, E, K, pl
     - plot: Boolean, If True, displays the images with epipolar lines overlaid. If False, returns epipolar line equations.
     """
     
-    ##### STUDENT CODE START #####
     F = np.linalg.inv(K).T @ E @ np.linalg.inv(K)
     
     epipolar_lines_in_1 = F.T @ uncalibrated_2
     epipolar_lines_in_2 = F @ uncalibrated_1
-    ##### STUDENT CODE END #####
 
     if(plot):
 

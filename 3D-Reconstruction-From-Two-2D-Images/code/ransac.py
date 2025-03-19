@@ -17,13 +17,14 @@ def ransac_estimator(X1, X2, num_iterations=60000):
         permuted_indices = np.random.RandomState(seed=(i*10)).permutation(np.arange(X1.shape[0]))
         sample_indices = permuted_indices[:sample_size]
         test_indices = permuted_indices[sample_size:]
+        
         """
         E: ndarray of shape (3,3)
             Essential matrix.
         inliers: ndarray of shape (n,)
             Indices of inlier matches.
         """
-        ##### STUDENT CODE START #####
+
         E = least_squares_estimation(X1[sample_indices, :], X2[sample_indices, :])
         inliers = list(sample_indices) 
         e3_cross = np.array([[0, -1, 0], [1, 0, 0], [0, 0, 0]])
@@ -35,7 +36,6 @@ def ransac_estimator(X1, X2, num_iterations=60000):
             if d_x2x1 + d_x1x2 < eps:
                 inliers.append(row)
         inliers = np.array(inliers)
-        ##### STUDENT CODE END #####
         
         if inliers.shape[0] > best_num_inliers:
             best_num_inliers = inliers.shape[0]

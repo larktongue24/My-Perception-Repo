@@ -13,12 +13,11 @@ def est_pixel_world(pixels, R_wc, t_wc, K):
         Pw: N x 3 points, the world coordinates of pixels
     """
 
-    ##### STUDENT CODE START #####
     pixel = np.column_stack((pixels, np.ones((pixels.shape[0], 1), dtype=pixels.dtype))) 
     pixel_calibrated = pixel @ np.linalg.inv(K).T
 
     lamb = -t_wc[2] / (R_wc[2] @ pixel_calibrated.T)  
 
     Pw = (lamb[:, np.newaxis] * (R_wc @ pixel_calibrated.T).T) + t_wc
-    ##### STUDENT CODE END #####
+
     return Pw

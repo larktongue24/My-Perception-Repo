@@ -2,7 +2,7 @@ import numpy as np
 
 def pose_candidates_from_E(E):
     transform_candidates = []
-    ##Note: each candidate in the above list should be a dictionary with keys "T", "R"
+
     """ 
 
     Computes four possible camera poses (rotation and translation) from the essential matrix.
@@ -16,7 +16,6 @@ def pose_candidates_from_E(E):
         - "R": 3x3 Matrix, Rotation matrix
     """
 
-    ##### STUDENT CODE START #####
     U, _, Vt = np.linalg.svd(E)
     
     Rz_plus = np.array([[0, -1, 0], [1, 0, 0], [0, 0, 1]])
@@ -31,6 +30,5 @@ def pose_candidates_from_E(E):
     transform_candidates.append({"T": T, "R": R2})
     transform_candidates.append({"T": -T, "R": R1})
     transform_candidates.append({"T": -T, "R": R2})
-    ##### STUDENT CODE END #####
 
     return transform_candidates

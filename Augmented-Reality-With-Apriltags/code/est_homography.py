@@ -12,8 +12,7 @@ def est_homography(X, Y):
         H: 3x3 transformation matrix s.t. Y ~ H*X
         
     """
-    
-    ##### STUDENT CODE START #####
+
     A = []
     for (x, y), (x_, y_) in zip(X, Y):
         A.append([x, y, 1, 0, 0, 0, -x*x_, -y*x_, -x_])
@@ -25,6 +24,5 @@ def est_homography(X, Y):
 
     H = Vt[-1].reshape(3, 3)
     H /= H[2, 2]
-    ##### STUDENT CODE END #####
     
     return H

@@ -10,7 +10,6 @@ def least_squares_estimation(X1, X2):
 	rets:
 	E: Essential Matrix using 8 point algorithm
 	"""
-	##### STUDENT CODE START #####
 	n = X1.shape[0]
 	A = np.zeros((n, 9))
 
@@ -29,6 +28,5 @@ def least_squares_estimation(X1, X2):
 	# Redecomposing E'
 	U, S, Vt = np.linalg.svd(E)
 	E = U @ np.diag([1, 1, 0]) @ Vt
-	##### STUDENT CODE END #####
 
 	return E

@@ -13,7 +13,6 @@ def reconstruct3D(transform_candidates, calibrated_1, calibrated_2):
 
 		lambdas = np.zeros((2, calibrated_1.shape[0]))
 
-		##### STUDENT CODE START #####
 		for i in range(calibrated_1.shape[0]):
 			x1 = calibrated_1[i]
 			x2 = calibrated_2[i]
@@ -21,7 +20,6 @@ def reconstruct3D(transform_candidates, calibrated_1, calibrated_2):
 			A = np.column_stack((x2, -R @ x1))  
 
 			lambdas[:, i] = np.linalg.lstsq(A, T, rcond=None)[0].flatten()  
-    	##### STUDENT CODE END #####
 		
 		num_front = np.sum(np.logical_and(lambdas[0]>0, lambdas[1]>0))
 
